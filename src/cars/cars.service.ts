@@ -3,28 +3,11 @@ import { Car } from './interfaces/cars.interface';
 import { v4 as uuidv4 } from 'uuid';
 import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
+
 @Injectable()
 export class CarsService {
 
-    private cars: Car[] = [
-        { id: uuidv4(),
-          brand: 'toyota',
-          model: 'Corolla',
-          year: 2020 },
-        { id: uuidv4(),
-          brand: 'honda',
-          model: 'Civic',
-          year: 2021 },
-        { id: uuidv4(),
-          brand: 'ford',
-          model: 'Focus',
-          year: 2019 },
-        { id: uuidv4(),
-          brand: 'Jeep',
-          model: 'Cherokee',
-          year: 2019 }
-        ];
-
+    private cars: Car[] = [];
 
     findAll() {
         return this.cars;
@@ -65,6 +48,10 @@ export class CarsService {
         this.findCarById(id);
         this.cars = this.cars.filter(car => car.id !== id);
         return { message: `Car with id ${id} deleted successfully` };
+    }
+
+    fillCarsWithSeedData(cars: Car[]) {                 
+        this.cars = cars;
     }
 
 }
